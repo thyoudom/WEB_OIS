@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Ontario International School</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="Style/headerstyle1.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="Style/clickMenu.js"></script>
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--fancyapp box-->
+	<!-- Add jQuery library -->
+	<script type="text/javascript" src="fancybox-2.1.7/lib/jquery-1.10.2.min.js"></script>
+
+	<!-- Add mousewheel plugin (this is optional) -->
+	<script type="text/javascript" src="fancybox-2.1.7/lib/jquery.mousewheel.pack.js?v=3.1.3"></script>
+
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="fancybox-2.1.7/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="fancybox-2.1.7/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+	<!-- Add Button helper (this is optional) -->
+	<link rel="stylesheet" type="text/css" href="fancybox-2.1.7/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+	<script type="text/javascript" src="../source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+
+	<!-- Add Thumbnail helper (this is optional) -->
+	<link rel="stylesheet" type="text/css" href="fancybox-2.1.7/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+	<script type="text/javascript" src="fancybox-2.1.7/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+	<!-- Add Media helper (this is optional) -->
+	<script type="text/javascript" src="fancybox-2.1.7/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			/*
+			 *  Simple image gallery. Uses default settings
+			 */
+
+			$('.fancybox').fancybox();
+
+			/*
+			 *  Different effects
+			 */
+
+			// Change title type, overlay closing speed
+			$(".fancybox-effects-a").fancybox({
+				helpers: {
+					title: {
+						type: 'outside'
+					},
+					overlay: {
+						speedOut: 0
+					}
+				}
+			});
+
+			// Disable opening and closing animations, change title type
+			$(".fancybox-effects-b").fancybox({
+				openEffect: 'none',
+				closeEffect: 'none',
+
+				helpers: {
+					title: {
+						type: 'over'
+					}
+				}
+			});
+
+			// Set custom style, close if clicked, change title type and overlay color
+			$(".fancybox-effects-c").fancybox({
+				wrapCSS: 'fancybox-custom',
+				closeClick: true,
+
+				openEffect: 'none',
+
+				helpers: {
+					title: {
+						type: 'inside'
+					},
+					overlay: {
+						css: {
+							'background': 'rgba(238,238,238,0.85)'
+						}
+					}
+				}
+			});
+
+			// Remove padding, set opening and closing animations, close if clicked and disable overlay
+			$(".fancybox-effects-d").fancybox({
+				padding: 0,
+
+				openEffect: 'elastic',
+				openSpeed: 250,
+
+				closeEffect: 'elastic',
+				closeSpeed: 250,
+
+				closeClick: true,
+
+				helpers: {
+					overlay: null
+				}
+			});
+
+			/*
+			 *  Button helper. Disable animations, hide close button, change title type and content
+			 */
+
+			$('.fancybox-buttons').fancybox({
+				openEffect: 'none',
+				closeEffect: 'none',
+
+				prevEffect: 'none',
+				nextEffect: 'none',
+
+				closeBtn: false,
+
+				helpers: {
+					title: {
+						type: 'inside'
+					},
+					buttons: {}
+				},
+
+				afterLoad: function () {
+					this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+				}
+			});
+
+
+			/*
+			 *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+			 */
+
+			$('.fancybox-thumbs').fancybox({
+				prevEffect: 'none',
+				nextEffect: 'none',
+
+				closeBtn: false,
+				arrows: false,
+				nextClick: true,
+
+				helpers: {
+					thumbs: {
+						width: 50,
+						height: 50
+					}
+				}
+			});
+
+			/*
+			 *  Media helper. Group items, disable animations, hide arrows, enable media and button helpers.
+			*/
+			$('.fancybox-media')
+				.attr('rel', 'media-gallery')
+				.fancybox({
+					openEffect: 'none',
+					closeEffect: 'none',
+					prevEffect: 'none',
+					nextEffect: 'none',
+
+					arrows: false,
+					helpers: {
+						media: {},
+						buttons: {}
+					}
+				});
+
+			/*
+			 *  Open manually
+			 */
+
+			$("#fancybox-manual-a").click(function () {
+				$.fancybox.open('1_b.jpg');
+			});
+
+			$("#fancybox-manual-b").click(function () {
+				$.fancybox.open({
+					href: 'iframe.html',
+					type: 'iframe',
+					padding: 5
+				});
+			});
+
+			$("#fancybox-manual-c").click(function () {
+				$.fancybox.open([
+					{
+						href: '1_b.jpg',
+						title: 'My title'
+					}, {
+						href: '2_b.jpg',
+						title: '2nd title'
+					}, {
+						href: '3_b.jpg'
+					}
+				], {
+					helpers: {
+						thumbs: {
+							width: 75,
+							height: 50
+						}
+					}
+				});
+			});
+
+
+		});
+	</script>
+	<style type="text/css">
+		.fancybox-custom .fancybox-skin {
+			box-shadow: 0 0 50px #222;
+		}
+
+		body {
+
+			margin: 0 auto;
+		}
+
+		@media screen and (max-width: 1921px) {
+			.w3-sidebar h3 img {
+				width: 396px;
+			}
+		}
+
+		@media screen and (max-width: 1919px) {
+			#Contactbanner {
+				margin-top: 0px;
+			}
+		}
+
+		@media screen and (max-width: 992px) {
+			#Contactbanner {
+				margin-top: 90px;
+			}
+		}
+
+		@media screen and (max-width: 320px) {
+			#Contactbanner {
+				margin-top: 60px;
+			}
+
+			.w3-sidebar h3 img {
+				width: 260px;
+			}
+
+			#NavidHid #myBtn i {
+				padding-right: 80px;
+			}
+
+			#NavidHid #myBtnCURRICULUM i {
+				padding-right: 80px;
+			}
+
+			#NavidHid #myBtnGALLERY i {
+				padding-right: 80px;
+			}
+
+			#NavidHid #myBtnEVENTS i {
+				padding-right: 80px;
+			}
+
+			.divScroll {
+				overflow: scroll;
+				height: 100vh;
+				width: 100%px;
+			}
+		}
+
+		@media screen and (max-width: 1919px) {
+			#CareerHid {
+				max-width: 100%;
+				width: 100%px;
+
+			}
+
+			#CareerHid img {
+				width: 100%;
+			}
+
+			.divScroll {
+				height: 100vh;
+				width: 100%px;
+			}
+		}
+
+		@media (max-width: 600px) and (min-width: 322px) {
+
+			#Contactbanner {
+				margin-top: 60px;
+			}
+
+			.w3-sidebar h3 img {
+				max-width: 260px;
+			}
+
+		}
+
+		@media screen and (max-width: 1920px) {
+			.w3-sidebar h3 img {
+				width: 380px;
+			}
+		}
+
+		@media (max-width: 389px) and (min-width: 228px) {
+			#Navlogohide h3 img {
+				max-width: 230px;
+			}
+		}
+	</style>
+	<style>
+		body {
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 15px;
+			line-height: 1.42857143;
+			color: #333;
+			background-color: #e0e0e0;
+		}
+
+		.battambang-black {
+			font-family: "Battambang", system-ui;
+			font-weight: 900;
+			font-style: normal;
+		}
+
+		.battambang-light {
+			font-family: "Khmer", sans-serif;
+			font-weight: 100;
+			font-style: normal;
+		}
+
+		.battambang-thin {
+			font-family: "Battambang", system-ui;
+			font-weight: 2rem;
+			font-style: normal;
+			color: black;
+		}
+
+		.box-title-post {
+			color: #001a31;
+			;
+			font-weight: bold;
+		}
+
+		.battambang-light {
+			font-family: "Battambang", system-ui;
+			font-weight: 300;
+			font-style: normal;
+			font-size: 4rem;
+			font-weight: bold;
+		}
+
+		.battambang-regular {
+			font-family: "Battambang", system-ui;
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		.battambang-bold {
+			font-family: "Battambang", system-ui;
+			font-weight: 700;
+			font-style: normal;
+		}
+
+		.battambang-black {
+			font-family: "Battambang", system-ui;
+			font-weight: 900;
+			font-style: normal;
+			color: red;
+		}
+
+		.badge-container {
+			border: 2px solid #007bff;
+			padding: 20px;
+			margin: 50px auto;
+			width: 300px;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.badge-count {
+			font-size: 3em;
+			font-weight: bold;
+			color: #28a745;
+			/* Success Green */
+		}
+
+		.custom-box-container {
+			padding-top: 20px;
+		}
+
+		.custom-panel {
+			border: 1px solid #ddd;
+			box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+		}
+
+		.custom-row-align {
+			display: table;
+			width: 100%;
+		}
+
+		/* Makes the columns behave like vertically centered table cells */
+		.custom-row-align>div {
+			display: table-cell;
+			float: none;
+			/* Override Bootstrap's default float */
+			vertical-align: middle;
+			/* Vertical Centering */
+		}
+
+		/* Logo Image Styling */
+		.logo-img {
+			/* max-width: 100px; Max-width requirement */
+			height: auto;
+			/* In the logo-column, the `vertical-align: middle;` on the parent table-cell 
+       handles the vertical centering for the image. */
+			display: block;
+			/* Ensures max-width works correctly */
+		}
+
+		/* ---------------------------------------------------- */
+		/* --- Content Specific Styles --- */
+		/* ---------------------------------------------------- */
+
+		.box-title {
+			margin-top: 0;
+			color: #001a31;
+		}
+
+		.box-description {
+			color: #000000;
+		}
+
+		.box-meta {
+			margin-top: 10px;
+		}
+
+		.box-meta p {
+			margin-bottom: 5px;
+			font-size: 14px;
+			color: #000000;
+		}
+
+		.box-meta i {
+			margin-right: 5px;
+			width: 15px;
+			/* Ensures icons align nicely */
+			text-align: center;
+		}
+
+		.muse-card {
+			border-radius: 8px;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			/* Smooth transition for changes */
+		}
+
+		.muse-card:hover {
+			transform: scale(1.05);
+			/* Scale up by 5% on hover */
+			box-shadow: 0 8px 16px rgba(172, 172, 172, 0.2);
+			/* Enhance shadow on hover */
+		}
+
+		@media screen and (max-width: 769px) {
+			.logo-column {
+				width: 100%;
+			}
+
+			.logo-colum-text {
+				width: 100%;
+			}
+
+			.col-xs-12 img {
+				width: 30%;
+				margin: auto;
+			}
+
+			.col-xs-4-post img {
+				width: 90%;
+				margin-bottom: 15px;
+			}
+
+			.col-xs-12 h1 {
+				color: rgb(255, 0, 0);
+				font-weight: bold;
+				text-align: center;
+			}
+
+			.col-xs-12 .battambang-light {
+				font-size: 4rem;
+				color: rgb(255, 0, 0);
+				font-weight: bold;
+				width: 100%;
+				text-align: center;
+			}
+
+			.col-xs-12 .battambang-light-post {
+				font-size: 2rem;
+				color: rgb(0, 17, 100);
+				font-weight: bold;
+				width: 100%;
+			}
+
+			.logo-img {
+				height: auto;
+				display: block;
+				width: 90%;
+			}
+
+			.custom-row-align {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(1fr));
+				/* Responsive columns */
+
+			}
+
+			.logo-img-post {
+				height: auto;
+				display: block;
+				width: 100%;
+			}
+		}
+
+		.panel-title {
+			font-size: 2rem;
+		}
+
+		@media screen and (max-width: 768px) {
+			/* Styles for medium screens */
+		}
+
+		@media screen and (max-width: 480px) {
+			.logo-column {
+				width: 100%;
+			}
+
+			.logo-colum-text {
+				width: 100%;
+			}
+
+			.col-xs-12 img {
+				width: 30%;
+				margin: auto;
+
+			}
+
+			.col-xs-4-post img {
+				width: 90%;
+				margin-bottom: 15px;
+				border-radius: 15px
+			}
+
+			.col-xs-12 h1 {
+				font-size: 2rem;
+				color: rgb(255, 0, 0);
+				font-weight: bold;
+			}
+
+			.col-xs-12 .battambang-light {
+				font-size: 2.5rem;
+				color: rgb(255, 0, 0);
+				font-weight: bold;
+				text-align: center;
+			}
+
+			.logo-img {
+				height: auto;
+				display: block;
+				width: 90%;
+			}
+
+			.custom-row-align {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(1fr));
+				/* Responsive columns */
+
+			}
+
+			.box-description {
+				float: left;
+				font-size: 2rem;
+			}
+
+			.panel-body p {
+				padding: 0px;
+			}
+
+			.battambang-light-post {
+				width: 100%;
+			}
+
+			.box-title-post {
+				color: #001a31;
+				font-weight: bold;
+				font-size: 2.1rem;
+				text-align: center;
+			}
+		}
+
+		.btn-success {
+			color: #fff;
+			background-color: #cc0000;
+			/* border-color: #0d0daa; */
+		}
+	</style>
+	<style>
+		body {
+			padding-top: 50px;
+			/* Space for fixed navbar */
+		}
+
+		.job-details-panel {
+			margin-bottom: 20px;
+		}
+
+		.jumbotron {
+			background-color: #f7f7f7;
+			padding-top: 30px;
+			padding-bottom: 30px;
+			margin-bottom: 20px;
+			border-radius: 6px;
+		}
+
+		.loading-panel {
+			background: white;
+			border-radius: 4px;
+			/* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+			padding: 40px;
+			text-align: center;
+			margin: 0 auto;
+		}
+
+		.loading-spinner {
+			width: 60px;
+			height: 60px;
+			border: 4px solid #f3f3f3;
+			border-top: 4px solid #337ab7;
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+			margin: 0 auto 20px;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		.loading-text {
+			color: #000000;
+			font-size: 16px;
+			margin-top: 15px;
+		}
+
+		.glyphicon-spin {
+			animation: spin 1s infinite linear;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+
+				<div class="panel panel-default custom-panel">
+					<div class="panel-body">
+						<div class="row custom-row-align">
+
+							<div class="col-sm-2 col-xs-4 logo-column">
+								<img src="https://api.ontario.edu.kh/Images/logo/Logo_School.png" alt="Placeholder Logo"
+									class="img-responsive logo-img">
+							</div>
+
+							<div class="col-sm-12 col-xs-12 logo-colum-text">
+								<h3 class="battambang-light battambang-black">សាលារៀន អន្តរជាតិ អនថារីយ៉ូ</h3>
+								<h1 class="box-title" style="color: red;">Ontario International School</h1>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default custom-panel">
+					<div class="panel-body">
+						<h4 style="line-height: 3rem;font-weight: bold;">
+							Ontario International School was established in 2017 and is committed to providing excellent
+							care and educational programs for infants and children, which blend fun and learning in a
+							safe, secure, stimulating, and student-centered environment. Ontario adopts the Canadian and
+							Cambodian curricula. Responding to the increasing number of students, we are looking for a
+							qualified candidate for the following position:
+						</h4>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+		<div class="card-container" id="cards-container">
+			<div class="col-xs-12">
+
+					<div class="panel panel-default custom-panel">
+						<div class="panel-body">
+							<div class="row custom-row-align">
+
+								<div class="col-sm-2 col-xs-4 logo-column">
+									<img src="images/Logo School.png" alt="Placeholder Logo"
+										class="img-responsive logo-img">
+								</div>
+
+								<div class="col-sm-10 col-xs-8">
+									<div class="loading-panel panel panel-default" id="LoadingGif">
+										<div class="panel-body">
+											<div class="loading-spinner"></div>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+		</div>
+		<div id="jobdesciptionview">
+
+		</div>
+
+	</div>
+
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<script>
+
+
+		// 2. Define the placeholder HTML (using a Bootstrap glyphicon as a simple image/icon)
+		// Alternatively, you could use a full <img> tag like:
+		// '<img src="placeholder.png" class="placeholder-image" alt="No Content"> No data available.'
+
+		// --- Step 1: Get Data Passed via URL Query Parameters ---
+		function getQueryParams() {
+			const params = new URLSearchParams(window.location.search);
+			return {
+				id: params.get('id'),
+				job_title: params.get('job_title'),
+				image_file: params.get('image_file')
+			};
+		}
+		const IMAGE_BASE_URL = 'https://api.ontario.edu.kh/'
+		const cardsContainer = document.getElementById('cards-container');
+
+		cardsContainer.innerHTML = "";
+		// --- Step 2: Fetch Additional Data from API using the ID ---
+		async function fetchItemDetails(itemId, itemTitle, image_file) {
+			const detailsContainer = document.getElementById('jobdesciptionview');
+			// Using a different endpoint for detailed data based on the ID
+			const DETAIL_API_URL = `https://api.ontario.edu.kh/API/Career/Career_read_by_id.php?action=read&id=${id}`;
+			try {
+				const response = await fetch(DETAIL_API_URL);
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+				const posts = await response.json();
+				posts.forEach(post => {
+					const panelCreate = document.createElement('div');
+					// panelCreate.className = '';
+
+					panelCreate.innerHTML = `
+                    <div class="col-md-9" style="padding-left: 0; padding-right: 0;">
+
+                    <div class="panel panel-default custom-panel" >
+                        <div class="panel-heading">
+                            <h2 class="panel-title"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> ${post.job_title}</h2>
+                        </div>
+                        <div class="panel-body ">
+                            ${post.description}
+                        </div>
+                         
+                        
+                    </div>
+                </div>
+                <div class="col-md-3" style="padding-left:15px; padding-right: 0;">
+
+                    <div class="panel panel-info job-details-panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                Quick Facts</h3>
+                        </div>
+                        <div class="list-group">
+                            <li class="list-group-item"><i class="glyphicon glyphicon-link"></i> <strong>Job ID:</strong> 202500${post.id}</li>
+                            <li class="list-group-item"><i class="glyphicon glyphicon-link"></i> <strong>Department:</strong> ${post.job_title}</li>
+                            <li class="list-group-item"><i class="glyphicon glyphicon-link"></i> <strong>Post Number Type:</strong> ${post.number_Post}</li>
+                            <li class="list-group-item"><i class="glyphicon glyphicon-link"></i> <strong>Posted:</strong> ${post.issue_date}</li>
+                            <li class="list-group-item"><i class="glyphicon glyphicon-link"></i> <strong>Expire:</strong> ${post.expire_date}</li>
+                            <li class="list-group-item"><i class="glyphicon glyphicon-link"></i> <strong>Schedule:</strong> ${post.schedule}</li>
+                        </div>
+                        
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                                Apply Now</h3>
+                        </div>
+                        <div class="panel-body">
+                            <a href="https://t.me/ontarioIS" target="_blank" class="btn btn-lg btn-success btn-block battambang-regular">Apply Now <span
+                                    class="glyphicon glyphicon-send"></span></a>
+                            <a href="http://m.me/ontariointernationalschool" target="_blank" class="btn btn-lg btn-success btn-block battambang-regular"> Apply Now <i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                    
+            `;
+
+					cardsContainer.appendChild(panelCreate);
+				});
+
+
+			} catch (error) {
+				console.error('Error fetching detail data:', error);
+			}
+		}
+
+		// Main execution logic for the detail page
+		const { id, job_title } = getQueryParams();
+
+		if (id && job_title) {
+			// Pass the received ID and Title to the detail fetching function
+			fetchItemDetails(id, job_title);
+		} else {
+			document.getElementById('item-details').innerHTML = '<p style="color: red;">Error: No item ID or title found in URL.</p>';
+		}
+	</script>
+
+	<!-- <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            // NOTE: You can specify a later version if needed, but v3.0 works for this example.
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script> -->
+</body>
+
+</html>
